@@ -1,15 +1,13 @@
 package it.hastega.librarybe.librarybe.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Getter @Setter @Builder
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Table(name = "account")
 public class Account implements Serializable {
     @Id
