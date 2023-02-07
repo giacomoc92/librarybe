@@ -1,6 +1,7 @@
 package it.hastega.librarybe.librarybe.controller;
 
 import it.hastega.librarybe.librarybe.dto.BookDTO;
+import it.hastega.librarybe.librarybe.dto.DetailBookDTO;
 import it.hastega.librarybe.librarybe.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,5 +19,10 @@ public class BookController {
     @GetMapping("/book")
     public ResponseEntity<List<BookDTO>> getBookByAccount(@RequestParam String email ) {
         return bookService.getBookByAccount(email);
+    }
+
+    @GetMapping("/book-detail")
+    public ResponseEntity<DetailBookDTO> getBookById(@RequestParam Long id) {
+        return bookService.getBookById(id);
     }
 }
