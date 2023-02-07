@@ -10,8 +10,6 @@ public class BookMapper {
         bookDTO.setId(book.getId());
         bookDTO.setTitle(book.getTitle());
         bookDTO.setAuthor(book.getAuthor());
-        bookDTO.setPlot(book.getPlot());
-        bookDTO.setIsbn(book.getIsbn());
         return bookDTO;
     }
 }
