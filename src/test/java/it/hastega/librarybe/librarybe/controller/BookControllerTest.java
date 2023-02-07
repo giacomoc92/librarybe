@@ -1,6 +1,7 @@
 package it.hastega.librarybe.librarybe.controller;
 
 import it.hastega.librarybe.librarybe.dto.BookDTO;
+import it.hastega.librarybe.librarybe.dto.DetailBookDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -32,11 +33,43 @@ class BookControllerTest {
 
     @ParameterizedTest
     @NullSource
-    @ValueSource(strings = {"aaaabbbb", "", })
+    @ValueSource(strings = {"aaaabbbb", ""})
     void getBookByAccountNegative(String email) {
         ResponseEntity<List<BookDTO>> response = bookController.getBookByAccount(email);
 
         Assertions.assertEquals("400 BAD_REQUEST", response.getStatusCode().toString());
+        Assertions.assertNull(response.getBody());
+    }
+
+    @Test
+    void getBookByIdPositive() {
+        Long id = 1L;
+        ResponseEntity<DetailBookDTO> response = bookController.getBookById(id);
+        DetailBookDTO book = response.getBody();
+
+        Assertions.assertEquals("200 OK", response.getStatusCode().toString());
+        Assertions.assertNotNull(book);
+        Assertions.assertEquals("La scienza delle verdure", book.getTitle());
+        Assertions.assertEquals("Dario Bressanini svela i principi chimici e fisici alla base delle verdure più utilizzate in cucina.",
+                book.getPlot());
+        Assertions.assertNotEquals("I Malavoglia", book.getTitle());
+    }
+
+    @Test
+    void getBookByIdNull() {
+        Long id = null;
+        ResponseEntity<DetailBookDTO> response = bookController.getBookById(id);
+
+        Assertions.assertEquals("400 BAD_REQUEST", response.getStatusCode().toString());
+        Assertions.assertNull(response.getBody());
+    }
+
+    @Test
+    void getBookByIdNegative() {
+        Long id = 9999L;
+        ResponseEntity<DetailBookDTO> response = bookController.getBookById(id);
+
+        Assertions.assertEquals("404 NOT_FOUND", response.getStatusCode().toString());
         Assertions.assertNull(response.getBody());
     }
 }
