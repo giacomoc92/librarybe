@@ -19,7 +19,7 @@ public class AccountBook implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "account_id")
     private Account account;
 
     @ManyToOne

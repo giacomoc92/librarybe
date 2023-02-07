@@ -1,16 +1,14 @@
 package it.hastega.librarybe.librarybe.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "book")
-@Getter @Setter @Builder
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Book implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +20,9 @@ public class Book implements Serializable {
 
     @Column(name = "author")
     private String author;
+
+    @Column(name = "plot")
+    private String plot;
 
     @Column(name = "isbn")
     private String isbn;
